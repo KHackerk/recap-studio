@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block body %}
+<div class="card" style="max-width:440px;margin:30px auto"><h2>Create your account</h2>
+<form method="post"><label>Your name</label><input name="name" required>
+<label>Email</label><input name="email" type="email" required>
+<label>Password (6+ characters)</label><input name="password" type="password" required>
+<button class="btn" style="width:100%">Register — get 100 free credits</button></form>
+<p class="mut">Already registered? <a href="/login">Log in</a></p></div>{% endblock %}

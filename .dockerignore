@@ -1,0 +1,6 @@
+data/
+test-assets/
+tools/
+.git/
+__pycache__/
+*.log

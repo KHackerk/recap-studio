@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block body %}
+<h2>{{ p.title }}</h2>
+<p><span class="pill {{ p.status }}">{{ p.status }}</span> {% if p.step %}<span class="mut">{{ p.step }}</span>{% endif %}</p>
+{% if p.error %}<div class="card" style="border-color:var(--bad)"><b>Job failed</b><p class="mut">{{ p.error }}</p><p class="mut">Credits for this job were refunded.</p></div>{% endif %}
+{% if p.status in ['queued','processing'] %}<div class="card"><p>⏳ Working... this page does not auto-refresh — <a href="">refresh</a> to check progress.</p></div>{% endif %}
+{% if files.get('recap.mp4') %}<div class="card"><h3>Your recap video</h3>
+<video controls src="/projects/{{ p.id }}/files/recap.mp4"></video></div>{% endif %}
+{% if meta %}<div class="card"><h3>Post-ready metadata</h3>
+<p><b>Title:</b> {{ meta.title }}</p><p><b>Description:</b> {{ meta.description }}</p>
+<p><b>Hashtags:</b> {{ meta.hashtags }}</p></div>{% endif %}
+{% if files %}<div class="card"><h3>Downloads</h3><table>
+{% for name, label in files.items() %}<tr><td>{{ label }}</td><td><a href="/projects/{{ p.id }}/files/{{ name }}">Download</a></td></tr>{% endfor %}
+</table></div>{% endif %}
+<p><a href="/dashboard">← Back to dashboard</a></p>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}RecapStudio{% endblock %}</title>
+<style>
+:root{--bg:#0d0b09;--card:#171310;--line:#2c251c;--gold:#e8a33d;--gold2:#c97b1e;--txt:#f3ead9;--mut:#a89880;--ok:#7bc47f;--bad:#e06c5f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+a{color:var(--gold);text-decoration:none}
+.nav{display:flex;align-items:center;gap:18px;padding:14px 22px;border-bottom:1px solid var(--line);background:#100d0a;position:sticky;top:0}
+.logo{font-weight:800;font-size:20px;color:var(--txt)}.logo span{color:var(--gold)}
+.nav .sp{flex:1}.btn{display:inline-block;background:linear-gradient(180deg,var(--gold),var(--gold2));color:#191104;border:0;padding:10px 18px;border-radius:9px;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--txt)}
+.wrap{max-width:980px;margin:0 auto;padding:26px 18px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:16px}
+input,select,textarea{width:100%;background:#0f0c09;border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:11px 12px;margin:6px 0 14px;font-size:16px}
+label{font-size:14px;color:var(--mut)}
+table{width:100%;border-collapse:collapse}th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+.flash{background:#24301f;border:1px solid #3d5231;color:#cfe8c2;padding:11px 14px;border-radius:10px;margin-bottom:14px}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;border:1px solid var(--line);color:var(--mut)}
+.pill.done{color:var(--ok);border-color:var(--ok)}.pill.failed{color:var(--bad);border-color:var(--bad)}.pill.processing,.pill.queued{color:var(--gold);border-color:var(--gold)}
+.hero{text-align:center;padding:52px 16px 30px}.hero h1{font-size:40px;margin:0 0 12px}.hero h1 span{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.mut{color:var(--mut)}code{background:#0f0c09;padding:2px 6px;border-radius:6px;word-break:break-all}
+video{width:100%;max-height:70vh;border-radius:12px;background:#000}
+</style></head><body>
+<div class="nav"><a class="logo" href="/">🎬 Recap<span>Studio</span></a><div class="sp"></div>
+{% if user %}<span class="pill">Credits: {{ user.credits }}</span><a href="/dashboard">Dashboard</a>
+{% if user.is_admin %}<a href="/admin">Admin</a>{% endif %}<a href="/logout">Log out</a>
+{% else %}<a href="/login">Log in</a><a class="btn" href="/register">Start free</a>{% endif %}</div>
+<div class="wrap">{% with msgs = get_flashed_messages() %}{% for m in msgs %}<div class="flash">{{ m }}</div>{% endfor %}{% endwith %}
+{% block body %}{% endblock %}</div></body></html>

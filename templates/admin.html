@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block body %}
+<h2>Admin</h2>
+<div class="card"><h3>AI settings</h3><form method="post" action="/admin/settings">
+<label>Whisper model (tiny = fastest, base = better accuracy)</label>
+<select name="whisper_model"><option value="tiny" {% if settings.get('whisper_model')=='tiny' %}selected{% endif %}>tiny</option>
+<option value="base" {% if settings.get('whisper_model')=='base' %}selected{% endif %}>base</option></select>
+<label>AI API base (optional, OpenAI-compatible — enables real AI recap writing)</label>
+<input name="ai_api_base" value="{{ settings.get('ai_api_base','') }}" placeholder="https://api.openai.com/v1">
+<label>AI API key (optional)</label><input name="ai_api_key" value="{{ settings.get('ai_api_key','') }}" placeholder="sk-...">
+<label>AI model</label><input name="ai_model" value="{{ settings.get('ai_model','gpt-4o-mini') }}">
+<button class="btn">Save settings</button></form>
+<p class="mut">Without an API key the site runs in free basic mode: local transcription + timeline recap + free translation + Edge voices.</p></div>
+<div class="card"><h3>Users & credits</h3><table><tr><th>ID</th><th>Name</th><th>Email</th><th>Credits</th><th>Add credits</th></tr>
+{% for u in users %}<tr><td>{{ u.id }}</td><td>{{ u.name }}{% if u.is_admin %} (admin){% endif %}</td><td>{{ u.email }}</td><td>{{ u.credits }}</td>
+<td><form method="post" action="/admin/credits" style="display:flex;gap:6px"><input type="hidden" name="user_id" value="{{ u.id }}">
+<input name="amount" type="number" value="100" style="width:90px;margin:0"><button class="btn ghost">Add</button></form></td></tr>{% endfor %}</table></div>
+<div class="card"><h3>Recent projects</h3><table><tr><th>#</th><th>User</th><th>Title</th><th>Status</th><th>Step / error</th></tr>
+{% for p in projects %}<tr><td>{{ p.id }}</td><td>{{ p.user_id }}</td><td>{{ p.title }}</td><td>{{ p.status }}</td><td class="mut">{{ p.step or p.error or '' }}</td></tr>{% endfor %}</table></div>
+{% endblock %}

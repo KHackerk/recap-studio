@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block body %}
+<h2>Welcome, {{ user.name }}</h2><p class="mut">Balance: <b style="color:var(--gold)">{{ user.credits }} credits</b></p>
+<p><a class="btn" href="/projects/new">+ New recap project</a></p>
+<div class="card"><h3>Your projects</h3>
+{% if projects %}<table><tr><th>#</th><th>Title</th><th>Status</th><th>Cost</th><th></th></tr>
+{% for p in projects %}<tr><td>{{ p.id }}</td><td>{{ p.title }}</td>
+<td><span class="pill {{ p.status }}">{{ p.status }}</span></td><td>{{ p.cost }}</td>
+<td><a href="/projects/{{ p.id }}">Open</a></td></tr>{% endfor %}</table>
+{% else %}<p class="mut">No projects yet. Create your first recap above.</p>{% endif %}</div>
+{% endblock %}

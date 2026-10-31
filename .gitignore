@@ -1,0 +1,7 @@
+data/
+models/
+test-assets/
+tools/
+__pycache__/
+*.log
+server.log

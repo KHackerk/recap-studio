@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block body %}
+<h2>New recap project</h2>
+<div class="card"><form method="post" enctype="multipart/form-data">
+<label>Project title</label><input name="title" placeholder="e.g. Titanic full story recap">
+<label>Video link (YouTube or direct link) — or upload below</label><input name="video_url" placeholder="https://...">
+<label>Or upload a video file (MP4, up to 1 GB)</label><input type="file" name="video_file" accept="video/*">
+<label>Minutes to process (cost: {{ cost_per_min }} credits per minute)</label>
+<input type="number" name="max_minutes" value="10" min="1" max="30">
+<label>Narration language</label><select name="target_lang"><option value="en">English</option><option value="my">Burmese (Myanmar)</option></select>
+<label>Voice</label><select name="voice">
+<option value="en-male">English — male</option><option value="en-female">English — female</option>
+<option value="my-male">Burmese — male</option><option value="my-female">Burmese — female</option></select>
+<button class="btn">Start recap job</button></form>
+<p class="mut">Shorter clips finish faster. If a job fails, its credits are refunded automatically.</p></div>
+{% endblock %}
